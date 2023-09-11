@@ -13,7 +13,7 @@ import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 public class GlobalControllerExceptionHandler {
 
     public GlobalControllerExceptionHandler() {
-        LOGGER.info("GlobalExceptionHandler was created");
+        LOGGER.info("GlobalExceptionHandler in recommendation was created");
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);

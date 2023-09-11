@@ -1,7 +1,6 @@
 package com.example.reviewservice.service.impl;
 
 
-
 import com.example.reviewservice.exceptions.InvalidInputException;
 import com.example.reviewservice.exceptions.NotFoundException;
 import com.example.reviewservice.model.Product;
@@ -29,17 +28,17 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
 
-
     @Override
     public List<Review> getReviews(int productId) {
+        if (productId < 1) throw new InvalidInputException("Invalid productId: " + productId);
+
+        if (productId == 13) throw new NotFoundException("No product found for productId: " + productId);
+
+
         Product product = restTemplate.getForObject("http://localhost:7001/product/" + productId, Product.class);
 
         assert product != null;
         int prodID = product.getProductId();
-
-        if (prodID < 1) throw new InvalidInputException("Invalid productId: " + productId);
-
-        if (prodID == 13) throw new NotFoundException("No product found for productId: " + productId);
 
 
         List<Review> list = new ArrayList<>();

@@ -29,14 +29,15 @@ public class RecommendationServiceImpl implements RecommendationService {
 
     @Override
     public List<Recommendation> getRecommendations(int productId) {
+        if (productId < 1) throw new InvalidInputException("Invalid productId: " + productId);
+
+        if (productId == 13) throw new NotFoundException("No product found for productId: " + productId);
+
+
         Product product = restTemplate.getForObject("Http://localhost:7001/product/" + productId, Product.class);
 
         assert product != null;
         int prodID = product.getProductId();
-
-        if (prodID < 1) throw new InvalidInputException("Invalid productId: " + productId);
-
-        if (prodID == 13) throw new NotFoundException("No product found for productId: " + productId);
 
 
         List<Recommendation> list = new ArrayList<>();
